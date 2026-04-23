@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+from pathlib import Path
 
 st.title('Uber pickups in NYC')
 st.header('A visualization of rides in New York City')
@@ -8,6 +9,7 @@ DATE_COLUMN = 'date/time'
 DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
          'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
 
+IMAGE_DIR = Path(__file__).parent / "images"
 @st.cache_data
 
 def load_data(nrows):
@@ -28,6 +30,11 @@ if st.checkbox('Show raw data'):
     st.subheader('Raw data')
     st.write(data)
 
+st.image(
+        str(IMAGE_DIR / "nyc.jpeg"),
+        width="stretch",
+        
+    )
 tab1, tab2 = st.tabs(['Histogram', 'Map'])
 with tab1:
     st.subheader('Number of pickups by hour')
